@@ -1,0 +1,4 @@
+dataset,hours,split,notes
+common_voice_v17_hy,45,train+dev,Community-contributed speech with accents
+openslr_154_audiobooks,35,train+dev,Broadcast-quality audiobook recordings
+fleurs_hy_am,2,eval,Short utterances for evaluation

@@ -1,3 +1,46 @@
-data/
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
 .env
-*.ipynb_checkpoints/
+.venv
+.env.*
+*.env
+
+# FastAPI
+app/.mypy_cache/
+app/.pytest_cache/
+app/.coverage
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Data
+/data/
+!data/raw/
+!data/processed/
+
+# Node
+node_modules/
+yarn.lock
+pnpm-lock.yaml
+web/node_modules/
+web/.svelte-kit/
+web/package-lock.json
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Build artifacts
+web/dist/
+app/build/
+

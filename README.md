@@ -40,19 +40,78 @@ Armenian remains underrepresented across modern AI tooling. ArmenianWhisper expl
 - 🎛️ **Frontend**: Svelte or React (planned)
 - ☁️ **Deployment**: Fly.io or Docker (planned)
 
+## 🗣️ Languages in Play
+
+| Language | Role |
+|----------|------|
+| Armenian (hy-AM) | Primary transcription input (Eastern + Western dialects) |
+| English (en) | Subtitle + translation output |
+| Python | Data prep, training scripts, FastAPI backend |
+| Bash | Dataset automation scripts |
+| HTML / TypeScript / Svelte | Web UI and interaction layer |
+
+## 🧠 Models & Tooling
+
+| Component | Library or Tooling |
+|-----------|-------------------|
+| Base ASR model | openai/whisper-small |
+| Fine-tuning | LoRA via `peft` + `transformers` |
+| Inference optimisation | Faster-Whisper (CT2 backend) |
+| Alignment | WhisperX for word-level timestamps |
+| Translation fallback | Meta NLLB-200 (optional) |
+| Data pipeline | `datasets`, `torchaudio`, custom scripts |
+| Deployment targets | Docker, Fly.io, GPU notebooks |
+| Frontend framework | Svelte + Vite |
+
 ---
 
-## 🗺️ Project Structure (planned)
+## 📁 Current Repository Layout
 
-```
+````text
 .
-├── data/                # Raw and processed datasets (ignored)
-├── models/              # Fine-tuned checkpoints and adapters
-├── notebooks/           # Exploration, evaluation, and alignment notebooks
-├── scripts/             # Dataset download, cleaning, and training helpers
-├── server/              # FastAPI backend
-└── web/                 # Frontend prototype (Svelte or React)
-```
+├── README.md
+├── .gitignore
+├── app/                # FastAPI backend scaffold
+│   ├── api/
+│   ├── core/
+│   ├── schemas/
+│   ├── services/
+│   └── tests/
+├── data/               # Raw datasets tracked via .gitkeep
+│   └── raw/
+├── docs/               # Reporting artifacts (e.g., dataset stats)
+├── notebooks/          # Exploratory analysis notebooks
+├── scripts/            # Automation helpers (download, preprocessing)
+└── web/                # Svelte + Vite frontend prototype
+    └── src/lib/components
+````
+
+---
+
+## 📊 Datasets in Scope
+
+| Dataset | Source | Est. Hours | Notes |
+|---------|--------|-----------|-------|
+| Common Voice v17 (hy) | Mozilla / Hugging Face | ~45 h | Community accents, read speech |
+| OpenSLR #154 | OpenSLR | ~35 h | Audiobook recordings |
+| FLEURS (hy-AM) | Google / Hugging Face | ~2 h | Evaluation split |
+| YouTube scraped (planned) | Public corpus | +50 h (target) | Conversational + interview audio |
+
+## 📦 Target Outputs
+
+- Upload audio or paste a YouTube URL → receive `.srt` / `.vtt` subtitles.
+- Dual-language transcripts (Armenian + English) for archive workflows.
+- Interactive subtitle timeline with word-level alignment.
+- Reproducible notebooks covering training, evaluation, and error analysis.
+
+## 🧪 Evaluation Targets
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Word Error Rate (WER) | ≤ 18% | Held-out Common Voice dev split |
+| BLEU (translation) | ≥ 40 | Evaluated on FLEURS hy→en |
+| Timestamp drift | ≤ 0.5 sec | Average misalignment (WhisperX) |
+| Inference latency | < 5× realtime (CPU) | Aim for 1× on GPU |
 
 ---
 
@@ -76,17 +135,30 @@ Armenian remains underrepresented across modern AI tooling. ArmenianWhisper expl
 ## 🚀 Quick Start
 
 ```bash
+# 1. Clone + switch to the collaboration branch
 git clone https://github.com/YOUR_USERNAME/armenian-whisper.git
 cd armenian-whisper
 git checkout tester
+
+# 2. (Optional) stage dataset downloads
 bash scripts/download_data.sh
+
+# 3. Spin up the FastAPI backend
+python -m venv .venv && source .venv/bin/activate
+pip install -r app/requirements.txt
+uvicorn app.main:app --reload --port 8000
+
+# 4. In a second terminal, run the Svelte dev server
+cd web
+npm install
+npm run dev -- --open
 ```
 
-> ℹ️ Replace `YOUR_USERNAME` with the correct GitHub handle. The `scripts/download_data.sh` helper will pull the core datasets once implemented; for now, follow the dataset notes in `scripts/`.
+> ℹ️ Replace `YOUR_USERNAME` with the correct GitHub handle. The dataset script is a placeholder until authenticated downloads are automated.
 
 ---
 
-## 📊 Evaluation Toolkit (planned)
+## 🧰 Evaluation Toolkit (roadmap)
 
 - BLEU and WER tracking notebooks in `notebooks/`.
 - Alignment inspection via WhisperX outputs.
@@ -100,6 +172,14 @@ bash scripts/download_data.sh
 - [ ] Draft evaluation notebooks for BLEU/WER tracking.
 - [ ] Stand up a FastAPI prototype with a translation endpoint.
 - [ ] Explore lightweight UI concepts (Svelte vs React).
+
+---
+
+## 📜 License & Usage
+
+- Code is released under the MIT License.
+- Datasets remain under their original Creative Commons or public licenses.
+- YouTube scraping stores metadata only—do not redistribute raw audio.
 
 ---
 
