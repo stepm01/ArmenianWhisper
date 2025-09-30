@@ -154,8 +154,6 @@ npm install
 npm run dev -- --open
 ```
 
-> ℹ️ Replace `YOUR_USERNAME` with the correct GitHub handle. The dataset script is a placeholder until authenticated downloads are automated.
-
 ---
 
 ## 🧰 Evaluation Toolkit (roadmap)
