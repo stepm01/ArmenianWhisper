@@ -115,22 +115,7 @@ Armenian remains underrepresented across modern AI tooling. ArmenianWhisper expl
 
 ---
 
-## 🗓️ 10-Week Roadmap
 
-| Week | Focus |
-|------|-------|
-| 1 | Set up dev environment; download and inspect datasets |
-| 2 | Build a YouTube scraper for Armenian speech clips |
-| 3 | Clean and quality-check aggregated datasets |
-| 4 | Run LoRA fine-tuning on Whisper-small |
-| 5 | Perform alignment (WhisperX) and evaluate BLEU/WER |
-| 6 | Improve translation quality and add fallback pipelines |
-| 7 | Implement the FastAPI backend |
-| 8 | Prototype the frontend |
-| 9 | Deploy with 8-bit quantization |
-| 10 | Ship blog post, demo, and wrap-up 📽️ |
-
----
 
 ## 🚀 Quick Start
 
